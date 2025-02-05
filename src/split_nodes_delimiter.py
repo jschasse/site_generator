@@ -80,7 +80,7 @@ def split_nodes_link(old_nodes):
             sections = original_text.split(f"[{link_alt}]({link_url})", 1)
             if sections[0]:
                 new_nodes.append(TextNode(sections[0], TextType.NORMAL))
-            new_nodes.append(TextNode(link_alt, TextType.LINKS, link_url))
+            new_nodes.append(TextNode(link_alt, TextType.LINK, link_url))
             if len(sections) > 1:
                 original_text = sections[1]
             else:
@@ -90,3 +90,19 @@ def split_nodes_link(old_nodes):
             new_nodes.append(TextNode(original_text, TextType.NORMAL))
         
     return new_nodes
+
+
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TextType.NORMAL)]
+
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+
+    nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC)
+
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+
+    nodes = split_nodes_image(nodes)
+
+    nodes = split_nodes_link(nodes)
+
+    return nodes

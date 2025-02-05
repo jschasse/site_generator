@@ -23,9 +23,9 @@ class TestSplitNodes(unittest.TestCase):
         new_nodes = split_nodes_link([node])
         expected_nodes = [
             TextNode("This is text with a link ", TextType.NORMAL),
-            TextNode("to boot dev", TextType.LINKS, "https://www.boot.dev"),
+            TextNode("to boot dev", TextType.LINK, "https://www.boot.dev"),
             TextNode(" and ", TextType.NORMAL),
-            TextNode("to youtube", TextType.LINKS, "https://www.youtube.com/@bootdotdev"),
+            TextNode("to youtube", TextType.LINK, "https://www.youtube.com/@bootdotdev"),
         ]
         self.assertEqual(new_nodes, expected_nodes)
 
