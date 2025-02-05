@@ -1,6 +1,8 @@
 import unittest
 
 from textnode import TextNode, TextType
+from text_to_html import *
+from htmlnode import *
 
 
 class TestTextNode(unittest.TestCase):
@@ -18,6 +20,9 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", TextType.NORMAL, "https://docs.python.org/3/reference/datamodel.html#object.__repr__")
         node2 = TextNode("This is a text node", TextType.NORMAL, "https://docs.python.org/3/reference/datamodel.html#object.__repr__")
         self.assertEqual(node, node2)
+    
+    
 
-#if __name__ == "__main__":
-#    unittest.main()
+
+if __name__ == "__main__":
+    unittest.main()
