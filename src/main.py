@@ -1,22 +1,30 @@
 from textnode import *
 from text_to_html import *
 from split_nodes_delimiter import *
+from markdown_to_blocks import *
+import os
+import shutil
 
 def main():
-    test = TextNode("hello wanderer", TextType.BOLD, "https://www.boot.dev")
-    print(test.__repr__())
-    node3 = TextNode("lol", TextType.NORMAL)
-    node3 = text_node_to_html_node(node3)
-    print(node3.to_html())
-    node = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
-    sections = extract_markdown_links(node)
-    image_alt = sections[0][0]
-    image_link = sections[0][1]
-    print(node.split(f"[{image_alt}]({image_link})"))
+    if os.path.exists("/home/jschasse/workspace/github.com/jschasse/site_generator/public"):
+        shutil.rmtree("/home/jschasse/workspace/github.com/jschasse/site_generator/public", ignore_errors=True)
+    copy_directory("/home/jschasse/workspace/github.com/jschasse/site_generator/static", "/home/jschasse/workspace/github.com/jschasse/site_generator/public")
 
 
 
+def copy_directory(source_path, dest_path):
+    if not os.path.exists(dest_path):
+        os.mkdir(dest_path)
+    for directories in os.listdir(source_path):
+        from_path = os.path.join(source_path, directories)
+        to_path = os.path.join(dest_path, directories)
+        if os.path.isfile(from_path):
+            shutil.copy(from_path, to_path)
+        else:
+            os.mkdir(os.path.join(from_path, to_path))
+            copy_directory(from_path, to_path)
 
+   
 
 if __name__ == "__main__":
     main()
