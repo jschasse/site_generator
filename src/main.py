@@ -2,6 +2,7 @@ from textnode import *
 from text_to_html import *
 from split_nodes_delimiter import *
 from markdown_to_blocks import *
+from generate_page import *
 import os
 import shutil
 
@@ -9,6 +10,7 @@ def main():
     if os.path.exists("/home/jschasse/workspace/github.com/jschasse/site_generator/public"):
         shutil.rmtree("/home/jschasse/workspace/github.com/jschasse/site_generator/public", ignore_errors=True)
     copy_directory("/home/jschasse/workspace/github.com/jschasse/site_generator/static", "/home/jschasse/workspace/github.com/jschasse/site_generator/public")
+    generate_page_recursive("/home/jschasse/workspace/github.com/jschasse/site_generator/content", "/home/jschasse/workspace/github.com/jschasse/site_generator/template.html", "/home/jschasse/workspace/github.com/jschasse/site_generator/public")
 
 
 
